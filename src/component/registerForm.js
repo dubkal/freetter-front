@@ -14,7 +14,7 @@ const RegisterForm = ({
       <div>Username: <input onChange={handleUsernameChange} value={username} /></div>
       <div>First name: <input onChange={handleFirstNameChange} value={firstName} /></div>
       <div>Last name: <input onChange={handleLastNameChange} value={lastName} /></div>
-      <div>Password: <input onChange={handlePasswordChange} value={password} /></div>
+      <div>Password: <input onChange={handlePasswordChange} value={password} type="password" /></div>
       <div><button type="submit">register</button></div>
     </form>)
 };

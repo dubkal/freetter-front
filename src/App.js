@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import homeService from './service/home';
 import authService from './service/auth';
-import RegisterForm from './component/registerForm';
+import SignupForm from './component/signupForm';
 import './App.css';
 
 const App = () => {
@@ -11,6 +11,7 @@ const App = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [signupErrors, setSignupErrors] = useState([]);
 
   useEffect(() => {
     homeService.getHomeString()
@@ -35,9 +36,9 @@ const App = () => {
     setPassword(event.target.value)
   }
 
-  const register = (event) => {
+  const signup = (event) => {
     event.preventDefault();
-    authService.register({
+    authService.signup({
       username: username,
       firstName: firstName,
       lastName: lastName,
@@ -45,9 +46,11 @@ const App = () => {
     })
       .then((response) => {
         console.log(response)
+        setSignupErrors([]);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error.response)
+        setSignupErrors(error.response.data)
       });
   }
 
@@ -56,8 +59,8 @@ const App = () => {
       <header className="header">
         <h1> {helloString}</h1>
       </header>
-      <RegisterForm
-        register={register}
+      <SignupForm
+        signup={signup}
         username={username}
         handleUsernameChange={handleUsernameChange}
         firstName={firstName}
@@ -66,6 +69,7 @@ const App = () => {
         handleLastNameChange={handleLastNameChange}
         password={password}
         handlePasswordChange={handlePasswordChange}
+        signupErrors={signupErrors}
       />
     </div>
   );

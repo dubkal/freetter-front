@@ -7,5 +7,10 @@ const signup = (newObject) => {
   return request.then((response) => response.data);
 }
 
-const functions = { signup }
+const login = (newObject) => {
+  const request = axios.post(baseUrl + "login", newObject);
+  return request.then((response) => response.data);
+}
+
+const functions = { signup, login }
 export default functions;

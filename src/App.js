@@ -4,6 +4,7 @@ import './App.css';
 import Homepage from './component/Homepage';
 import Signup from './component/Signup';
 import Login from './component/Login';
+import User from './component/User';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/signup">Signup</Link></li>
           <li><Link to="/login">Login</Link></li>
+          <li><Link to="/user">User</Link></li>
         </ul>
       </nav>
 
@@ -20,6 +22,7 @@ const App = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </>
   );

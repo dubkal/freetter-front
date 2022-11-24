@@ -13,6 +13,7 @@ const Login = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+
   const login = (event) => {
     event.preventDefault();
     authService.login({ username: username, password: password, })
@@ -25,6 +26,7 @@ const Login = () => {
         setLoginErrors(error.response.data)
       });
   }
+
   return (
     <form onSubmit={login}>
       <div>Username: <input onChange={handleUsernameChange} value={username} /></div>

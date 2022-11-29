@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import authService from '../service/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrors, setLoginErrors] = useState([]);
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
@@ -20,6 +22,7 @@ const Login = () => {
       .then((response) => {
         console.log(response)
         setLoginErrors([]);
+        navigate("/user");
       })
       .catch((error) => {
         console.log(error.response)

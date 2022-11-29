@@ -2,22 +2,21 @@ import axios from "axios";
 
 const baseUrl = "/api/auth/";
 
-const signup = (newObject) => {
+const signup = async (newObject) => {
   const request = axios.post(baseUrl + "signup", newObject);
-  return request.then((response) => response.data);
+  const response = await request;
+    return response.data;
 }
 
-const login = (newObject) => {
+const login = async (newObject) => {
   const request = axios.post(baseUrl + "login", newObject);
-  return request
-    .then((response) => {
-      console.log("this is login response");
-      console.log(response.data);
-      if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data))
-      }
-      return response.data
-    });
+  const response = await request;
+    console.log("this is login response");
+    console.log(response.data);
+    if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    return response.data;
 }
 
 const logout = () => {

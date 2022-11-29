@@ -3,23 +3,42 @@ import userService from "../service/user"
 
 const User = () => {
   const [all, setAll] = useState("");
-  const [greeting, setGreeting] = useState("");
-
+  const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
   useEffect(() => {
     userService.getPublicContent()
       .then((response) => {
         setAll(response.message);
       });
-    userService.getGreetings()
+    userService.getUsername()
       .then((response) => {
-        setGreeting(response.message);
+        setUsername(response.message);
+      });
+    userService.getUser()
+      .then((response) => {
+        setUser(response);
       });
   }, []);
+
+  const drawUserDetails = () => {
+    if (user != null)
+      return (
+        <div>
+          <ul>
+            <li>{user.username}</li>
+            <li>{user.firstName}</li>
+            <li>{user.lastName}</li>
+          </ul>
+        </div>
+      );
+
+  }
 
   return (
     <div>
       <p>this should say all: {all}</p>
-      <p>this should say greeting: {greeting}</p>
+      <p>Welcome: {username}</p>
+      {drawUserDetails()}
     </div>
   )
 }

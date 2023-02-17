@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Signup = () => {
 
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,10 @@ const Signup = () => {
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
+  }
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
   }
 
   const handleFirstNameChange = (event) => {
@@ -31,6 +36,7 @@ const Signup = () => {
     event.preventDefault();
     authService.signup({
       username: username,
+      email: email,
       firstName: firstName,
       lastName: lastName,
       password: password,
@@ -48,6 +54,7 @@ const Signup = () => {
   return (
     <form onSubmit={signup}>
       <div>Username: <input onChange={handleUsernameChange} value={username} /></div>
+      <div>Email: <input onChange={handleEmailChange} value={email} type="email" /></div>
       <div>First name: <input onChange={handleFirstNameChange} value={firstName} /></div>
       <div>Last name: <input onChange={handleLastNameChange} value={lastName} /></div>
       <div>Password: <input onChange={handlePasswordChange} value={password} type="password" /></div>

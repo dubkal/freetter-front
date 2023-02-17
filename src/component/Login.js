@@ -1,12 +1,19 @@
-import { useState } from 'react';
-import authService from '../service/auth';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import authService from '../service/auth';
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrors, setLoginErrors] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if(user != null){
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
@@ -22,11 +29,15 @@ const Login = () => {
       .then((response) => {
         console.log(response)
         setLoginErrors([]);
-        navigate("/user");
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error.response)
-        setLoginErrors(error.response.data)
+        if (error.response.status === 401) {
+          console.log("401 Unauthorized");
+          setLoginErrors(["Wrong username and/or password"]);
+          setUsername("");
+          setPassword("");
+        }
       });
   }
 

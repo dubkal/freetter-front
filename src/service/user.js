@@ -16,10 +16,19 @@ const getUsername = async () => {
   const response = await request;
   return response.data;
 }
+
 const getUser = async () => {
   const request = axios.get(baseUrl + "user", { headers: authHeaderService.authHeader() });
   const response = await request;
   return response.data;
 }
-const functions = { getPublicContent, getUsername, getUser };
+
+const saveUserDetails = async () => {
+  const request = axios.post(baseUrl + "saveUserDetails", { headers: authHeaderService.authHeader() });
+  const response = await request;
+  return response.data;
+}
+
+const functions = { getPublicContent, getUsername, getUser, saveUserDetails };
+
 export default functions;
